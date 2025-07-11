@@ -4,12 +4,12 @@ import ModalWithForm from "../ModalWithForm/ModalWithForm";
 const AddItemModal = ({ activeModal, onClose, onAddItem }) => {
   const [formData, setFormData] = useState({
     name: "",
-    imageUrl: "",
+    link: "",
     weather: "",
   });
 
   const [errors, setErrors] = useState({
-    imageUrl: false,
+    link: false,
   });
 
   const isValidImageUrl = (url) => {
@@ -29,10 +29,10 @@ const AddItemModal = ({ activeModal, onClose, onAddItem }) => {
       [name]: value,
     }));
 
-    if (name === "imageUrl") {
+    if (name === "link") {
       setErrors((prev) => ({
         ...prev,
-        imageUrl: value.trim() !== "" && !isValidImageUrl(value),
+        link: value.trim() !== "" && !isValidImageUrl(value),
       }));
     }
   };
@@ -42,7 +42,7 @@ const AddItemModal = ({ activeModal, onClose, onAddItem }) => {
     if (isFormValid) {
       onAddItem({
         name: formData.name,
-        imageUrl: formData.imageUrl,
+        link: formData.link,
         weather: formData.weather,
       });
       onClose();
@@ -51,8 +51,8 @@ const AddItemModal = ({ activeModal, onClose, onAddItem }) => {
 
   const isFormValid =
     formData.name.trim() !== "" &&
-    formData.imageUrl.trim() !== "" &&
-    isValidImageUrl(formData.imageUrl) &&
+    formData.link.trim() !== "" &&
+    isValidImageUrl(formData.link) &&
     formData.weather !== "";
 
   return (
@@ -80,11 +80,11 @@ const AddItemModal = ({ activeModal, onClose, onAddItem }) => {
       />
 
       <label
-        htmlFor="imageUrl"
-        className={`modal__label ${errors.imageUrl ? "modal__label_error" : ""}`}
+        htmlFor="link"
+        className={`modal__label ${errors.link ? "modal__label_error" : ""}`}
       >
         Image*{" "}
-        {errors.imageUrl && (
+        {errors.link && (
           <span className="modal__error-text">
             (This is not a valid image link)
           </span>
@@ -92,11 +92,11 @@ const AddItemModal = ({ activeModal, onClose, onAddItem }) => {
       </label>
       <input
         type="url"
-        className={`modal__input ${errors.imageUrl ? "modal__input_error" : ""}`}
-        id="imageUrl"
-        name="imageUrl"
+        className={`modal__input ${errors.link ? "modal__input_error" : ""}`}
+        id="link"
+        name="link"
         placeholder="Image URL"
-        value={formData.imageUrl}
+        value={formData.link}
         onChange={handleInputChange}
         required
       />
