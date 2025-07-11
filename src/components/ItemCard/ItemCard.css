@@ -1,0 +1,143 @@
+.card {
+  list-style: none;
+  background-color: #f3f3f3;
+  border-radius: 16px;
+  border: 1px solid #0000004d;
+  overflow: hidden;
+  transition:
+    transform 0.2s ease,
+    box-shadow 0.2s ease;
+  cursor: pointer;
+  width: 100%;
+  max-width: 323px;
+  min-width: 280px;
+  height: 326px;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+  opacity: 1;
+  visibility: visible;
+}
+
+.card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.15);
+}
+
+.card__name {
+  position: absolute;
+  top: 15px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 73px;
+  height: 24px;
+  margin: 0;
+  font-family: "Cabinet Grotesk", sans-serif;
+  font-weight: 700;
+  font-style: normal;
+  font-size: 16px;
+  line-height: 20px;
+  letter-spacing: 0%;
+  color: #00000099;
+  background-color: #fff;
+  border-radius: 4px;
+  padding: 2px 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  white-space: nowrap;
+  z-index: 1;
+}
+
+.card__image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  cursor: pointer;
+  display: block;
+  border: none;
+  outline: none;
+  opacity: 1;
+  visibility: visible;
+}
+
+/* Mobile styles */
+@media (max-width: 768px) {
+  .card {
+    width: 100%;
+    min-width: 140px;
+    max-width: 100%;
+    height: 200px;
+    padding: 0;
+  }
+
+  .card__image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  .card__name {
+    top: 10px;
+    font-size: 12px;
+    height: 18px;
+    padding: 1px 6px;
+    width: 55px;
+  }
+}
+
+/* Small mobile styles */
+@media (max-width: 480px) {
+  .card {
+    width: 100%;
+    min-width: 120px;
+    max-width: 100%;
+    height: 150px;
+    padding: 0;
+  }
+
+  .card__image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  .card__name {
+    top: 6px;
+    font-size: 10px;
+    height: 14px;
+    padding: 1px 4px;
+    width: 45px;
+  }
+}
+
+/* Extra small mobile styles for 375px and below */
+@media (max-width: 375px) {
+  .card {
+    width: 100%;
+    min-width: 160px;
+    max-width: 160px;
+    height: 160px;
+    padding: 0;
+    aspect-ratio: 1/1;
+  }
+
+  .card__image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  .card__name {
+    top: 7px;
+    font-size: 16px;
+    height: 24px;
+    padding: 2px 8px;
+    width: 72px;
+    line-height: 20px;
+  }
+}

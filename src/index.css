@@ -1,0 +1,56 @@
+/* Import vendor files */
+@import "./vendor/normalize.css";
+@import "./vendor/fonts.css";
+
+/* Local Cabinet Grotesk font declarations - keeping for backward compatibility */
+@font-face {
+  font-family: "Cabinet Grotesk";
+  src:
+    url("/fonts/CabinetGrotesk-Regular.woff2") format("woff2"),
+    url("/fonts/CabinetGrotesk-Regular.woff") format("woff");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Cabinet Grotesk";
+  src:
+    url("/fonts/CabinetGrotesk-Medium.woff2") format("woff2"),
+    url("/fonts/CabinetGrotesk-Medium.woff") format("woff");
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Cabinet Grotesk";
+  src:
+    url("/fonts/CabinetGrotesk-Bold.woff2") format("woff2"),
+    url("/fonts/CabinetGrotesk-Bold.woff") format("woff");
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+
+/* Global font styles */
+html {
+  font-family: "Cabinet Grotesk", sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  font-family: "Cabinet Grotesk", sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  font-family: "Cabinet Grotesk", sans-serif;
+}

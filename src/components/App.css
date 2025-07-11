@@ -1,0 +1,49 @@
+.page {
+  min-height: 100vh;
+  font-family: "Cabinet Grotesk", sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.page__content {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+* {
+  box-sizing: border-box;
+  font-family: inherit;
+}
+
+*,
+*::before,
+*::after {
+  font-family: "Cabinet Grotesk", sans-serif;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  font-family: "Cabinet Grotesk", sans-serif;
+}
+
+/* Global responsive styles */
+@media (max-width: 768px) {
+  html {
+    font-size: 14px;
+  }
+}
+
+@media (max-width: 480px) {
+  html {
+    font-size: 13px;
+  }
+}
+
+/* Ensure proper mobile viewport behavior */
+@media (max-width: 768px) {
+  .page {
+    overflow-x: hidden;
+  }
+}

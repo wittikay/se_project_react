@@ -1,0 +1,109 @@
+.weather-card {
+  width: 100%;
+  height: 80px;
+  opacity: 1;
+  border-radius: 12px;
+  color: #fff;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: flex-start;
+  padding: 0 0;
+  margin-bottom: 2rem;
+  position: relative;
+  overflow: hidden;
+}
+
+.weather-card__temp {
+  font-size: 36px;
+  font-weight: 700;
+  margin: 0;
+  z-index: 2;
+  position: relative;
+  padding-left: 16px;
+}
+
+/* Tablet styles */
+@media (max-width: 1024px) and (min-width: 769px) {
+  .weather-card {
+    padding: 0 0;
+    height: 75px;
+  }
+
+  .weather-card__temp {
+    font-size: 2.8rem;
+    padding-left: 32px;
+  }
+
+  .weather-card__image {
+    width: 95px;
+    height: 95px;
+  }
+}
+
+/* Mobile styles */
+@media (max-width: 768px) {
+  .weather-card {
+    padding: 0 0;
+    margin-bottom: 1.5rem;
+    height: 70px;
+  }
+
+  .weather-card__temp {
+    font-size: 2.5rem;
+    padding-left: 16px;
+  }
+
+  .weather-card__image {
+    width: 90px;
+    height: 90px;
+  }
+}
+
+/* Small mobile styles */
+@media (max-width: 480px) {
+  .weather-card {
+    padding: 0 0;
+    margin-bottom: 1rem;
+    height: 60px;
+  }
+
+  .weather-card__temp {
+    font-size: 2rem;
+    padding-left: 16px;
+  }
+
+  .weather-card__image {
+    width: 70px;
+    height: 70px;
+  }
+}
+
+/* Extra small mobile styles for 375px and below */
+@media (max-width: 375px) {
+  .weather-card {
+    width: 343px;
+    height: 80px;
+    position: relative;
+    transform: rotate(0deg);
+    opacity: 1;
+    padding: 0 0;
+    margin: 0 16px 32px 16px;
+    left: 0;
+    top: 0;
+  }
+
+  .weather-card__temp {
+    font-family: "Cabinet Grotesk", sans-serif;
+    font-weight: 700;
+    font-size: 36px;
+    line-height: 100%;
+    letter-spacing: 0%;
+    padding-left: 16px;
+  }
+
+  .weather-card__image {
+    width: 60px;
+    height: 60px;
+  }
+}
