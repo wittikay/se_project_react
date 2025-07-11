@@ -9,10 +9,21 @@ import ProfileModal from "./ProfileModal/ProfileModal";
 import { getForecastWeather } from "../utils/weatherApi";
 import { defaultClothingItems } from "../utils/constants";
 
+const defaultWeatherData = {
+  temp: 75,
+  type: "warm",
+  city: "New York",
+  condition: {
+    main: "Clear",
+    description: "clear sky",
+    backgroundImage: null,
+  },
+};
+
 function App() {
   const [activeModal, setActiveModal] = useState("");
   const [selectedCard, setSelectedCard] = useState({});
-  const [weatherData, setWeatherData] = useState({});
+  const [weatherData, setWeatherData] = useState(defaultWeatherData);
   const [clothingItems, setClothingItems] = useState(defaultClothingItems);
   const [currentUser, setCurrentUser] = useState({
     name: "Terrence Tegegne",
@@ -26,16 +37,7 @@ function App() {
       })
       .catch((error) => {
         console.error("Error fetching weather data:", error);
-        setWeatherData({
-          temp: 75,
-          type: "warm",
-          city: "New York",
-          condition: {
-            main: "Clear",
-            description: "clear sky",
-            backgroundImage: null,
-          },
-        });
+        setWeatherData(defaultWeatherData);
       });
   }, []);
 
