@@ -62,13 +62,10 @@ const Header = ({
           </div>
 
           <button
-            className={`header__menu-btn ${isMobileMenuOpened ? "header__menu-btn_opened" : ""}`}
+            className={`header__menu-btn ${isMobileMenuOpened ? "header__menu-btn_opened header__menu-btn_hidden" : ""}`}
             onClick={toggleMobileMenu}
             type="button"
             aria-label="Open menu"
-            style={{
-              visibility: isMobileMenuOpened ? "hidden" : "visible",
-            }}
           >
             <span className="header__menu-btn-line"></span>
             <span className="header__menu-btn-line"></span>

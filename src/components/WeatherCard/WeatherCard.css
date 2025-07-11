@@ -12,6 +12,10 @@
   margin-bottom: 2rem;
   position: relative;
   overflow: hidden;
+  background-image: var(--weather-bg-image);
+  background-size: cover;
+  background-position: right center;
+  background-repeat: no-repeat;
 }
 
 .weather-card__temp {
