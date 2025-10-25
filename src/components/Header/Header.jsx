@@ -1,14 +1,12 @@
 import { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import "./Header.css";
 import logo from "../../images/logo.svg";
 import mobileOverlayCloseIcon from "../../images/mobileoverlayx.svg";
+import ToggleSwitch from "../ToggleSwitch/ToggleSwitch";
 
-const Header = ({
-  handleAddClick,
-  handleProfileClick,
-  weatherData,
-  currentUser,
-}) => {
+const Header = ({ handleAddClick, handleProfileClick, weatherData, currentUser }) => {
+  const navigate = useNavigate();
   const [isMobileMenuOpened, setIsMobileMenuOpened] = useState(false);
 
   const userName = currentUser?.name || "User";
@@ -54,7 +52,7 @@ const Header = ({
     <header className="header">
       <div className="header__container">
         <div className="header__menu-target-area">
-          <div className="header__logo">
+          <div className="header__logo" style={{ cursor: "pointer" }} onClick={() => navigate("/") }>
             <img className="header__logo-image" src={logo} alt="WTWR logo" />
             <p className="header__date-and-location">
               {currentDate}, {weatherData?.city || "New York"}
@@ -128,6 +126,7 @@ const Header = ({
 
         {/* Desktop Navigation container */}
         <div className="header__user-container">
+          <ToggleSwitch />
           <button
             onClick={handleAddClick}
             type="button"
@@ -135,7 +134,13 @@ const Header = ({
           >
             + Add clothes
           </button>
-          <p className="header__username">{userName}</p>
+          <p
+            className="header__username"
+            style={{ cursor: "pointer" }}
+            onClick={() => navigate("/profile")}
+          >
+            {userName}
+          </p>
 
           {/* Avatar - either image or initial */}
           {userAvatar ? (
@@ -143,12 +148,14 @@ const Header = ({
               src={userAvatar}
               alt={userName}
               className="header__avatar header__avatar_image"
-              onClick={handleProfileClick}
+              style={{ cursor: "pointer" }}
+              onClick={() => navigate("/profile")}
             />
           ) : (
             <div
               className="header__avatar header__avatar_initial"
-              onClick={handleProfileClick}
+              style={{ cursor: "pointer" }}
+              onClick={() => navigate("/profile")}
             >
               {getInitial(userName)}
             </div>

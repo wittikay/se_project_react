@@ -1,16 +1,23 @@
 import { useState, useEffect } from "react";
+import { useLocation } from "react-router-dom";
 import "./App.css";
 import Header from "./Header/Header";
 import Main from "./Main/Main";
 import Footer from "./Footer/Footer";
 import ItemModal from "./ItemModal/ItemModal";
 import AddItemModal from "./AddItemModal/AddItemModal";
-import ProfileModal from "./ProfileModal/ProfileModal";
+import Profile from "./Profile/Profile";
 import { getForecastWeather } from "../utils/weatherApi";
 import { defaultClothingItems } from "../utils/constants";
+import { CurrentTemperatureUnitProvider } from "../contexts/CurrentTemperatureUnit";
+import { getClothingItems, addClothingItem } from "../utils/api";
+import avatarImage from "../images/Ellipse 18.png";
 
 const defaultWeatherData = {
-  temp: 75,
+  temp: {
+    F: 75,
+    C: Math.round((75 - 32) * 5 / 9),
+  },
   type: "warm",
   city: "New York",
   condition: {
@@ -20,15 +27,15 @@ const defaultWeatherData = {
   },
 };
 
-function App() {
+function App({ clothingItems: clothingItemsProp, currentUser: currentUserProp }) {
   const [activeModal, setActiveModal] = useState("");
   const [selectedCard, setSelectedCard] = useState({});
   const [weatherData, setWeatherData] = useState(defaultWeatherData);
-  const [clothingItems, setClothingItems] = useState(defaultClothingItems);
-  const [currentUser, setCurrentUser] = useState({
-    name: "Terrence Tegegne",
-    avatar: null,
-  });
+  const [clothingItems, setClothingItems] = useState(clothingItemsProp || []);
+  const [currentUser] = useState(
+    currentUserProp || { name: "Terrence Tegegne", avatar: avatarImage }
+  );
+  const location = useLocation();
 
   useEffect(() => {
     getForecastWeather()
@@ -39,7 +46,28 @@ function App() {
         console.error("Error fetching weather data:", error);
         setWeatherData(defaultWeatherData);
       });
+
+    if (!clothingItemsProp || clothingItemsProp.length === 0) {
+      getClothingItems()
+        .then((items) => {
+          const itemsWithId = items.map(item => ({
+            ...item,
+            _id: item._id || item.id
+          }));
+          setClothingItems(itemsWithId);
+        })
+        .catch((err) => {
+          console.error("Error fetching clothing items:", err);
+          setClothingItems(defaultClothingItems);
+        });
+    }
   }, []);
+
+  useEffect(() => {
+    if (Array.isArray(clothingItemsProp)) {
+      setClothingItems(clothingItemsProp);
+    }
+  }, [clothingItemsProp]);
 
   const handleCardClick = (card) => {
     setActiveModal("preview");
@@ -54,59 +82,70 @@ function App() {
     setActiveModal("edit-profile");
   };
 
-  const handleUpdateProfile = (userData) => {
-    setCurrentUser(userData);
-  };
-
   const handleAddItem = (item) => {
-    const newItem = {
-      ...item,
-      _id: Date.now().toString(),
-    };
-    setClothingItems([newItem, ...clothingItems]);
+    addClothingItem(item)
+      .then((newItem) => {
+        const itemWithId = { ...newItem, _id: newItem.id || newItem._id };
+        setClothingItems((prev) => [itemWithId, ...prev]);
+        closeActiveModal();
+      })
+      .catch((err) => {
+        console.error("Error adding clothing item:", err);
+        alert(`Failed to add item: ${err.message}`);
+      });
   };
 
   const closeActiveModal = () => {
     setActiveModal("");
   };
 
+  const handleDeleteItem = (id) => {
+    setClothingItems((prev) => prev.filter((item) => item._id !== id));
+  };
+
   return (
-    <div className="page">
-      <div className="page__content">
-        <Header
-          handleAddClick={handleAddClick}
-          handleProfileClick={handleProfileClick}
-          weatherData={weatherData}
-          currentUser={currentUser}
+    <CurrentTemperatureUnitProvider>
+      <div className="page">
+        <div className="page__content">
+          <Header
+            handleAddClick={handleAddClick}
+            handleProfileClick={handleProfileClick}
+            weatherData={weatherData}
+            currentUser={currentUser}
+          />
+          {location.pathname === "/profile" ? (
+            <Profile
+              clothingItems={clothingItems}
+              currentUser={currentUser}
+              onCardClick={handleCardClick}
+              onDeleteItem={handleDeleteItem}
+              onAddClick={handleAddClick}
+            />
+          ) : (
+            <Main
+              weatherData={weatherData}
+              clothingItems={clothingItems}
+              onCardClick={handleCardClick}
+            />
+          )}
+          <Footer />
+        </div>
+
+        {/* Modals */}
+        <ItemModal
+          activeModal={activeModal}
+          card={selectedCard}
+          onClose={closeActiveModal}
+          onDelete={handleDeleteItem}
         />
-        <Main
-          weatherData={weatherData}
-          clothingItems={clothingItems}
-          onCardClick={handleCardClick}
+
+        <AddItemModal
+          activeModal={activeModal}
+          onClose={closeActiveModal}
+          onAddItem={handleAddItem}
         />
-        <Footer />
       </div>
-
-      {/* Modals */}
-      <ItemModal
-        activeModal={activeModal}
-        card={selectedCard}
-        onClose={closeActiveModal}
-      />
-
-      <AddItemModal
-        activeModal={activeModal}
-        onClose={closeActiveModal}
-        onAddItem={handleAddItem}
-      />
-
-      <ProfileModal
-        activeModal={activeModal}
-        onClose={closeActiveModal}
-        onUpdateProfile={handleUpdateProfile}
-        currentUser={currentUser}
-      />
-    </div>
+    </CurrentTemperatureUnitProvider>
   );
 }
 

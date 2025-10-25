@@ -1,6 +1,11 @@
+
 import "./WeatherCard.css";
+import { useContext } from "react";
+import { CurrentTemperatureUnitContext } from "../../contexts/CurrentTemperatureUnit";
+
 
 const WeatherCard = ({ weatherData }) => {
+  const { unit } = useContext(CurrentTemperatureUnitContext);
   // Get the background image for the weather condition
   const backgroundImage = weatherData?.condition?.backgroundImage;
 
@@ -11,9 +16,19 @@ const WeatherCard = ({ weatherData }) => {
       }
     : {};
 
+  // Safely derive a displayable temperature regardless of data shape
+  const rawTemp = weatherData?.temp;
+  const displayTemp =
+    rawTemp && typeof rawTemp === "object"
+      ? rawTemp[unit]
+      : rawTemp;
+
   return (
     <section className="weather-card" style={cardStyle}>
-      <p className="weather-card__temp">{weatherData?.temp}°F</p>
+      <p className="weather-card__temp">
+        {displayTemp !== undefined && displayTemp !== null ? displayTemp : ""}°
+        {unit}
+      </p>
     </section>
   );
 };

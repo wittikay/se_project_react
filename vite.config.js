@@ -5,6 +5,7 @@
    base: "/se_project_react/",
    plugins: [react()],
    server: {
-     port: 3000,
+     port: 5173,
+     historyApiFallback: true,
    },
  });

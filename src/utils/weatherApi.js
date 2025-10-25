@@ -90,12 +90,19 @@ export const getWeatherCondition = (conditionId) => {
   return "sunny"; // default
 };
 
-// Function to filter temperature and location from weather API response
+// Normalize OpenWeather response into the shape the UI expects
+// Includes both F and C, and a background image for the WeatherCard
 export const filterWeatherData = (data) => {
   const result = {};
   result.city = data.name;
-  result.temp = Math.round(data.main.temp);
-  result.type = getWeatherType(result.temp);
+
+  const tempF = Math.round(data.main.temp);
+  result.temp = {
+    F: tempF,
+  C: Math.round(((tempF - 32) * 5) / 9),
+  };
+
+  result.type = getWeatherType(tempF);
   result.sunrise = data.sys.sunrise;
   result.sunset = data.sys.sunset;
 
@@ -110,6 +117,7 @@ export const filterWeatherData = (data) => {
 
   return result;
 };
+
 
 // Function to fetch weather data from OpenWeather API
 export const getWeather = ({ latitude, longitude }, APIkey) => {

@@ -1,8 +1,8 @@
-/* Import vendor files */
+/* Vendor Files */
 @import "./vendor/normalize.css";
 @import "./vendor/fonts.css";
 
-/* Local Cabinet Grotesk font declarations - keeping for backward compatibility */
+/* Font Declarations */
 @font-face {
   font-family: "Cabinet Grotesk";
   src:
@@ -33,7 +33,7 @@
   font-display: swap;
 }
 
-/* Global font styles */
+/* Global Styles */
 html {
   font-family: "Cabinet Grotesk", sans-serif;
   -webkit-font-smoothing: antialiased;

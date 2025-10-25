@@ -1,15 +1,11 @@
-import { useState } from "react";
 import ModalWithForm from "../ModalWithForm/ModalWithForm";
+import useForm from "../../hooks/useForm";
 
 const AddItemModal = ({ activeModal, onClose, onAddItem }) => {
-  const [formData, setFormData] = useState({
+  const { values, errors, isValid, handleChange, resetForm, setErrors, setIsValid } = useForm({
     name: "",
     link: "",
     weather: "",
-  });
-
-  const [errors, setErrors] = useState({
-    link: false,
   });
 
   const isValidImageUrl = (url) => {
@@ -23,37 +19,29 @@ const AddItemModal = ({ activeModal, onClose, onAddItem }) => {
   };
 
   const handleInputChange = (e) => {
-    const { name, value } = e.target;
-    setFormData((prev) => ({
-      ...prev,
-      [name]: value,
-    }));
-
-    if (name === "link") {
-      setErrors((prev) => ({
-        ...prev,
-        link: value.trim() !== "" && !isValidImageUrl(value),
-      }));
+    handleChange(e);
+    if (e.target.name === "link") {
+      setErrors((prev) => ({ ...prev, link: e.target.value.trim() !== "" && !isValidImageUrl(e.target.value) }));
+      // rely on native validity plus our custom image check
+      setIsValid(e.target.closest("form").checkValidity() && isValidImageUrl(e.target.value));
     }
   };
 
   const handleSubmit = (e) => {
     e.preventDefault();
     if (isFormValid) {
-      onAddItem({
-        name: formData.name,
-        link: formData.link,
-        weather: formData.weather,
-      });
+      onAddItem({ name: values.name, link: values.link, weather: values.weather });
+      resetForm({ name: "", link: "", weather: "" }, {}, false);
       onClose();
     }
   };
 
   const isFormValid =
-    formData.name.trim() !== "" &&
-    formData.link.trim() !== "" &&
-    isValidImageUrl(formData.link) &&
-    formData.weather !== "";
+    values.name.trim() !== "" &&
+    values.link.trim() !== "" &&
+    isValidImageUrl(values.link) &&
+    values.weather !== "" &&
+    isValid;
 
   return (
     <ModalWithForm
@@ -74,7 +62,7 @@ const AddItemModal = ({ activeModal, onClose, onAddItem }) => {
         id="name"
         name="name"
         placeholder="Name"
-        value={formData.name}
+        value={values.name}
         onChange={handleInputChange}
         required
       />
@@ -96,7 +84,7 @@ const AddItemModal = ({ activeModal, onClose, onAddItem }) => {
         id="link"
         name="link"
         placeholder="Image URL"
-        value={formData.link}
+        value={values.link}
         onChange={handleInputChange}
         required
       />
@@ -110,7 +98,7 @@ const AddItemModal = ({ activeModal, onClose, onAddItem }) => {
             name="weather"
             value="hot"
             className="modal__radio-input"
-            checked={formData.weather === "hot"}
+            checked={values.weather === "hot"}
             onChange={handleInputChange}
             required
           />
@@ -123,7 +111,7 @@ const AddItemModal = ({ activeModal, onClose, onAddItem }) => {
             name="weather"
             value="warm"
             className="modal__radio-input"
-            checked={formData.weather === "warm"}
+            checked={values.weather === "warm"}
             onChange={handleInputChange}
             required
           />
@@ -136,7 +124,7 @@ const AddItemModal = ({ activeModal, onClose, onAddItem }) => {
             name="weather"
             value="cold"
             className="modal__radio-input"
-            checked={formData.weather === "cold"}
+            checked={values.weather === "cold"}
             onChange={handleInputChange}
             required
           />

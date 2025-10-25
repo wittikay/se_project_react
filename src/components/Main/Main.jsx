@@ -1,5 +1,8 @@
+
 import "./Main.css";
 import WeatherCard from "../WeatherCard/WeatherCard";
+import { useContext } from "react";
+import { CurrentTemperatureUnitContext } from "../../contexts/CurrentTemperatureUnit";
 import ItemCard from "../ItemCard/ItemCard";
 
 const Main = ({ weatherData, clothingItems, onCardClick }) => {
@@ -8,6 +11,12 @@ const Main = ({ weatherData, clothingItems, onCardClick }) => {
     day: "numeric",
   });
 
+  const { unit } = useContext(CurrentTemperatureUnitContext);
+  const rawTemp = weatherData?.temp;
+  const displayTemp =
+    rawTemp && typeof rawTemp === "object"
+      ? rawTemp[unit]
+      : rawTemp;
   return (
     <main className="main">
       <div className="main__container">
@@ -19,19 +28,28 @@ const Main = ({ weatherData, clothingItems, onCardClick }) => {
 
         <section className="cards">
           <p className="cards__text">
-            Today is {weatherData?.temp}°F / You may want to wear:
+            Today is {displayTemp}{displayTemp !== undefined ? `°${unit}` : ""} / You may want to wear:
           </p>
-          <ul className="cards__list">
-            {clothingItems
-              .filter((item) => item.weather === weatherData?.type)
-              .map((item) => (
-                <ItemCard
-                  key={item._id}
-                  item={item}
-                  onCardClick={onCardClick}
-                />
-              ))}
-          </ul>
+          {(() => {
+            const type = weatherData?.type;
+            const filtered = type ? clothingItems.filter((item) => item.weather === type) : clothingItems;
+            if (filtered.length === 0) {
+              return (
+                <div className="cards__empty">
+                  <p className="cards__empty-text">
+                    No items for “{weatherData?.type ?? "current"}” weather yet. Try adding a garment for this condition.
+                  </p>
+                </div>
+              );
+            }
+            return (
+              <ul className="cards__list">
+                {filtered.map((item) => (
+                  <ItemCard key={item._id} item={item} onCardClick={onCardClick} />
+                ))}
+              </ul>
+            );
+          })()}
         </section>
       </div>
     </main>

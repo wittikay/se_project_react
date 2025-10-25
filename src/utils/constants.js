@@ -1,3 +1,4 @@
+// This file should only hold small constants. Weather helpers live in weatherApi.js
 // Weather API configuration
 export const APIkey = "57f6e9990c6fc7042488d3d0dd41c1c3";
 
@@ -12,6 +13,14 @@ import TShirtImage from "../images/T-Shirt.png";
 import ShortsImage from "../images/Shorts.png";
 import CapImage from "../images/Cap.png";
 import SneakersImage from "../images/Sneakers.png";
+
+// Map db.json string paths to bundled assets so UI can render local images
+export const clothingImageMap = {
+  "images/T-Shirt.png": TShirtImage,
+  "images/Shorts.png": ShortsImage,
+  "images/Cap.png": CapImage,
+  "images/Sneakers.png": SneakersImage,
+};
 
 // Default clothing items data
 export const defaultClothingItems = [

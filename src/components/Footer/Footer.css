@@ -1,95 +1,43 @@
 .footer {
+  position: relative;
+  left: 0;
+  right: 0;
+  width: 100%;
+  max-width: 100vw;
+  height: 20px;
   background-color: #f3f3f3;
-  padding: 24px;
+  padding: 0;
+  overflow: hidden;
   margin-top: auto;
+  margin-bottom: 24px;
 }
 
 .footer__container {
-  max-width: calc(100vw - 80px);
+  position: relative;
+  width: 100%;
+  max-width: 1440px;
+  height: 20px;
   margin: 0 auto;
-  padding: 0 40px;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
+  padding: 0;
+  overflow: hidden;
 }
 
 .footer__text,
 .footer__year {
+  position: absolute;
+  top: 0; /* Y = 932px overall is handled by the footer bottom anchoring */
   margin: 0;
   font-size: 16px;
   color: #000;
   font-weight: 500;
+  line-height: 20px;
 }
 
-/* Tablet styles */
-@media (max-width: 1024px) and (min-width: 769px) {
-  .footer__container {
-    max-width: calc(100vw - 64px);
-    padding: 0 32px;
-  }
+.footer__text { left: 40px; width: 204px; height: 20px; }
+.footer__year { left: 1360px; width: 38px; height: 20px; }
 
-  .footer__text,
-  .footer__year {
-    font-size: 18px;
-    line-height: 22px;
-    font-family: "Cabinet Grotesk", sans-serif;
-    font-weight: 500;
-  }
-}
-
-/* Mobile styles */
-@media (max-width: 768px) {
-  .footer__container {
-    max-width: calc(100vw - 32px);
-    flex-direction: row;
-    justify-content: space-between;
-    align-items: center;
-    padding: 0 16px;
-  }
-
-  .footer__text,
-  .footer__year {
-    font-size: 16px;
-    line-height: 20px;
-    font-family: "Cabinet Grotesk", sans-serif;
-    font-weight: 500;
-  }
-}
-
-/* Small mobile styles */
-@media (max-width: 480px) {
-  .footer {
-    padding: 0.75rem 0;
-  }
-
-  .footer__container {
-    max-width: calc(100vw - 32px);
-    flex-direction: row;
-    justify-content: space-between;
-    align-items: center;
-    padding: 0 16px;
-  }
-
-  .footer__text,
-  .footer__year {
-    font-size: 14px;
-    line-height: 18px;
-  }
-}
-
-/* Extra small mobile styles for 375px and below */
-@media (max-width: 375px) {
-  .footer__container {
-    max-width: calc(100vw - 24px);
-    flex-direction: row;
-    justify-content: space-between;
-    align-items: center;
-    padding: 0 16px;
-  }
-
-  .footer__text,
-  .footer__year {
-    font-size: 16px;
-    line-height: 16px;
-  }
+/* Responsive fallback: keep the footer at the bottom and maintain left offsets proportionally */
+@media (max-width: 1440px) {
+  .footer__container { width: 100%; }
+  .footer__year { right: 40px; left: auto; }
 }

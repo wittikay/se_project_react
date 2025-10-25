@@ -1,0 +1,44 @@
+.clothes-section {
+  position: absolute;
+  top: 135px;
+  left: 385px;
+  width: 1015px;
+  max-width: calc(100vw - 425px);
+  background: transparent;
+  padding: 0 0 144px 0;
+  box-sizing: border-box;
+}
+.clothes-section__header {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  margin-bottom: 16px;
+}
+.clothes-section__title {
+  font-size: 20px;
+  font-weight: 700;
+  margin: 0;
+}
+.clothes-section__add-new {
+  background: none;
+  border: none;
+  color: rgba(0, 0, 0, 0.6);
+  font-size: 20px;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.clothes-section__add-new:hover {
+  text-decoration: underline;
+}
+.clothes-section__list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.clothes-section__list--grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+}
