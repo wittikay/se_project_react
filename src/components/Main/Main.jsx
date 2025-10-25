@@ -11,11 +11,11 @@ const Main = ({ weatherData, clothingItems, onCardClick }) => {
     day: "numeric",
   });
 
-  const { unit } = useContext(CurrentTemperatureUnitContext);
+  const { currentTemperatureUnit } = useContext(CurrentTemperatureUnitContext);
   const rawTemp = weatherData?.temp;
   const displayTemp =
     rawTemp && typeof rawTemp === "object"
-      ? rawTemp[unit]
+      ? rawTemp[currentTemperatureUnit]
       : rawTemp;
   return (
     <main className="main">
@@ -28,7 +28,7 @@ const Main = ({ weatherData, clothingItems, onCardClick }) => {
 
         <section className="cards">
           <p className="cards__text">
-            Today is {displayTemp}{displayTemp !== undefined ? `°${unit}` : ""} / You may want to wear:
+            Today is {displayTemp}{displayTemp !== undefined ? `°${currentTemperatureUnit}` : ""} / You may want to wear:
           </p>
           {(() => {
             const type = weatherData?.type;

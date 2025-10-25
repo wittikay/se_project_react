@@ -1,4 +1,4 @@
-export const BASE_URL = import.meta.env.VITE_API_URL || 'http://localhost:3002';
+export const BASE_URL = import.meta.env.VITE_API_URL || 'http://localhost:3001';
 
 async function request(path, options = {}) {
   const res = await fetch(`${BASE_URL}${path}`, options);
@@ -13,11 +13,11 @@ async function request(path, options = {}) {
 }
 
 export async function getClothingItems() {
-  return request('/clothingItems');
+  return request('/items');
 }
 
 export const addClothingItem = async (item) => {
-  return request('/clothingItems', {
+  return request('/items', {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify(item),
@@ -25,5 +25,5 @@ export const addClothingItem = async (item) => {
 };
 
 export const deleteClothingItem = async (id) => {
-  return request(`/clothingItems/${id}`, { method: 'DELETE' });
+  return request(`/items/${id}`, { method: 'DELETE' });
 };

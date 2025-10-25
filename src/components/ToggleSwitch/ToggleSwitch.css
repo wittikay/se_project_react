@@ -54,5 +54,7 @@
 .toggle-switch__checkbox:not(:checked) + .toggle-switch__slider + .toggle-switch__label-f {
     color: rgba(255, 255, 255, 1);
 }
+
 .toggle-switch__checkbox:checked ~ .toggle-switch__label-c {
     color: rgba(255, 255, 255, 1);
+}

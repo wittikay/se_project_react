@@ -61,6 +61,7 @@ function App({ clothingItems: clothingItemsProp, currentUser: currentUserProp })
           setClothingItems(defaultClothingItems);
         });
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   useEffect(() => {

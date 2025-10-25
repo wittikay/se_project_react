@@ -1,6 +1,6 @@
 // This file should only hold small constants. Weather helpers live in weatherApi.js
 // Weather API configuration
-export const APIkey = "57f6e9990c6fc7042488d3d0dd41c1c3";
+export const apiKey = "57f6e9990c6fc7042488d3d0dd41c1c3";
 
 // Default coordinates (New York City)
 export const coordinates = {
@@ -28,72 +28,72 @@ export const defaultClothingItems = [
     _id: 0,
     name: "T-Shirt",
     weather: "hot",
-    link: TShirtImage,
+    imageUrl: TShirtImage,
   },
   {
     _id: 1,
     name: "Shorts",
     weather: "hot",
-    link: ShortsImage,
+    imageUrl: ShortsImage,
   },
   {
     _id: 2,
     name: "Cap",
     weather: "hot",
-    link: CapImage,
+    imageUrl: CapImage,
   },
   {
     _id: 3,
     name: "Sneakers",
     weather: "hot",
-    link: SneakersImage,
+    imageUrl: SneakersImage,
   },
   {
     _id: 4,
     name: "T-Shirt",
     weather: "warm",
-    link: TShirtImage,
+    imageUrl: TShirtImage,
   },
   {
     _id: 5,
     name: "Shorts",
     weather: "warm",
-    link: ShortsImage,
+    imageUrl: ShortsImage,
   },
   {
     _id: 6,
     name: "Cap",
     weather: "warm",
-    link: CapImage,
+    imageUrl: CapImage,
   },
   {
     _id: 7,
     name: "Sneakers",
     weather: "warm",
-    link: SneakersImage,
+    imageUrl: SneakersImage,
   },
   {
     _id: 8,
     name: "T-Shirt",
     weather: "cold",
-    link: TShirtImage,
+    imageUrl: TShirtImage,
   },
   {
     _id: 9,
     name: "Shorts",
     weather: "cold",
-    link: ShortsImage,
+    imageUrl: ShortsImage,
   },
   {
     _id: 10,
     name: "Cap",
     weather: "cold",
-    link: CapImage,
+    imageUrl: CapImage,
   },
   {
     _id: 11,
     name: "Sneakers",
     weather: "cold",
-    link: SneakersImage,
+    imageUrl: SneakersImage,
   },
 ];

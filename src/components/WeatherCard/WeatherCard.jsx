@@ -5,7 +5,7 @@ import { CurrentTemperatureUnitContext } from "../../contexts/CurrentTemperature
 
 
 const WeatherCard = ({ weatherData }) => {
-  const { unit } = useContext(CurrentTemperatureUnitContext);
+  const { currentTemperatureUnit } = useContext(CurrentTemperatureUnitContext);
   // Get the background image for the weather condition
   const backgroundImage = weatherData?.condition?.backgroundImage;
 
@@ -20,14 +20,14 @@ const WeatherCard = ({ weatherData }) => {
   const rawTemp = weatherData?.temp;
   const displayTemp =
     rawTemp && typeof rawTemp === "object"
-      ? rawTemp[unit]
+      ? rawTemp[currentTemperatureUnit]
       : rawTemp;
 
   return (
     <section className="weather-card" style={cardStyle}>
       <p className="weather-card__temp">
         {displayTemp !== undefined && displayTemp !== null ? displayTemp : ""}°
-        {unit}
+        {currentTemperatureUnit}
       </p>
     </section>
   );

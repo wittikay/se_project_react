@@ -1,12 +1,20 @@
+import { useEffect } from "react";
 import ModalWithForm from "../ModalWithForm/ModalWithForm";
 import useForm from "../../hooks/useForm";
 
 const AddItemModal = ({ activeModal, onClose, onAddItem }) => {
   const { values, errors, isValid, handleChange, resetForm, setErrors, setIsValid } = useForm({
     name: "",
-    link: "",
+    imageUrl: "",
     weather: "",
   });
+
+  // Reset form when modal closes
+  useEffect(() => {
+    if (activeModal !== "add-garment") {
+      resetForm({ name: "", imageUrl: "", weather: "" }, {}, false);
+    }
+  }, [activeModal, resetForm]);
 
   const isValidImageUrl = (url) => {
     if (!url) return true;
@@ -20,8 +28,8 @@ const AddItemModal = ({ activeModal, onClose, onAddItem }) => {
 
   const handleInputChange = (e) => {
     handleChange(e);
-    if (e.target.name === "link") {
-      setErrors((prev) => ({ ...prev, link: e.target.value.trim() !== "" && !isValidImageUrl(e.target.value) }));
+    if (e.target.name === "imageUrl") {
+      setErrors((prev) => ({ ...prev, imageUrl: e.target.value.trim() !== "" && !isValidImageUrl(e.target.value) }));
       // rely on native validity plus our custom image check
       setIsValid(e.target.closest("form").checkValidity() && isValidImageUrl(e.target.value));
     }
@@ -30,16 +38,15 @@ const AddItemModal = ({ activeModal, onClose, onAddItem }) => {
   const handleSubmit = (e) => {
     e.preventDefault();
     if (isFormValid) {
-      onAddItem({ name: values.name, link: values.link, weather: values.weather });
-      resetForm({ name: "", link: "", weather: "" }, {}, false);
-      onClose();
+      onAddItem({ name: values.name, imageUrl: values.imageUrl, weather: values.weather });
+      // Don't reset or close here - let the parent handle it after API success
     }
   };
 
   const isFormValid =
     values.name.trim() !== "" &&
-    values.link.trim() !== "" &&
-    isValidImageUrl(values.link) &&
+    values.imageUrl.trim() !== "" &&
+    isValidImageUrl(values.imageUrl) &&
     values.weather !== "" &&
     isValid;
 
@@ -68,11 +75,11 @@ const AddItemModal = ({ activeModal, onClose, onAddItem }) => {
       />
 
       <label
-        htmlFor="link"
-        className={`modal__label ${errors.link ? "modal__label_error" : ""}`}
+        htmlFor="imageUrl"
+        className={`modal__label ${errors.imageUrl ? "modal__label_error" : ""}`}
       >
         Image*{" "}
-        {errors.link && (
+        {errors.imageUrl && (
           <span className="modal__error-text">
             (This is not a valid image link)
           </span>
@@ -80,11 +87,11 @@ const AddItemModal = ({ activeModal, onClose, onAddItem }) => {
       </label>
       <input
         type="url"
-        className={`modal__input ${errors.link ? "modal__input_error" : ""}`}
-        id="link"
-        name="link"
+        className={`modal__input ${errors.imageUrl ? "modal__input_error" : ""}`}
+        id="imageUrl"
+        name="imageUrl"
         placeholder="Image URL"
-        value={values.link}
+        value={values.imageUrl}
         onChange={handleInputChange}
         required
       />

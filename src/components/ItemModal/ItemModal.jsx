@@ -70,7 +70,7 @@ const ItemModal = ({ activeModal, card, onClose, onDelete }) => {
               />
             </button>
             <img 
-              src={clothingImageMap[card?.link] || card?.link} 
+              src={clothingImageMap[card?.imageUrl] || card?.imageUrl} 
               alt={card?.name} 
               className="modal__image" 
             />

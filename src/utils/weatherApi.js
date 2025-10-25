@@ -1,4 +1,4 @@
-import { APIkey, coordinates } from "./constants";
+import { apiKey, coordinates } from "./constants";
 
 // Import weather images
 import sunnyDay from "../images/sunny day.png";
@@ -120,8 +120,8 @@ export const filterWeatherData = (data) => {
 
 
 // Function to fetch weather data from OpenWeather API
-export const getWeather = ({ latitude, longitude }, APIkey) => {
-  const weatherApi = `https://api.openweathermap.org/data/2.5/weather?lat=${latitude}&lon=${longitude}&units=imperial&appid=${APIkey}`;
+export const getWeather = ({ latitude, longitude }, apiKey) => {
+  const weatherApi = `https://api.openweathermap.org/data/2.5/weather?lat=${latitude}&lon=${longitude}&units=imperial&appid=${apiKey}`;
 
   return fetch(weatherApi)
     .then((res) => {
@@ -138,5 +138,5 @@ export const getWeather = ({ latitude, longitude }, APIkey) => {
 
 // Main function to get weather data using default coordinates
 export const getForecastWeather = () => {
-  return getWeather(coordinates, APIkey);
+  return getWeather(coordinates, apiKey);
 };

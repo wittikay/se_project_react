@@ -5,7 +5,7 @@ import logo from "../../images/logo.svg";
 import mobileOverlayCloseIcon from "../../images/mobileoverlayx.svg";
 import ToggleSwitch from "../ToggleSwitch/ToggleSwitch";
 
-const Header = ({ handleAddClick, handleProfileClick, weatherData, currentUser }) => {
+const Header = ({ handleAddClick, weatherData, currentUser }) => {
   const [isMobileMenuOpened, setIsMobileMenuOpened] = useState(false);
 
   const userName = currentUser?.name || "User";
