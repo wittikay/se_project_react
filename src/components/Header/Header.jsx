@@ -1,12 +1,11 @@
 import { useState, useEffect } from "react";
-import { useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 import "./Header.css";
 import logo from "../../images/logo.svg";
 import mobileOverlayCloseIcon from "../../images/mobileoverlayx.svg";
 import ToggleSwitch from "../ToggleSwitch/ToggleSwitch";
 
 const Header = ({ handleAddClick, handleProfileClick, weatherData, currentUser }) => {
-  const navigate = useNavigate();
   const [isMobileMenuOpened, setIsMobileMenuOpened] = useState(false);
 
   const userName = currentUser?.name || "User";
@@ -52,12 +51,12 @@ const Header = ({ handleAddClick, handleProfileClick, weatherData, currentUser }
     <header className="header">
       <div className="header__container">
         <div className="header__menu-target-area">
-          <div className="header__logo" style={{ cursor: "pointer" }} onClick={() => navigate("/") }>
+          <Link to="/" className="header__logo">
             <img className="header__logo-image" src={logo} alt="WTWR logo" />
             <p className="header__date-and-location">
               {currentDate}, {weatherData?.city || "New York"}
             </p>
-          </div>
+          </Link>
 
           <button
             className={`header__menu-btn ${isMobileMenuOpened ? "header__menu-btn_opened header__menu-btn_hidden" : ""}`}
@@ -87,27 +86,19 @@ const Header = ({ handleAddClick, handleProfileClick, weatherData, currentUser }
             <div className="header__menu-content">
               <div className="header__menu-user">
                 <p className="header__menu-username">{userName}</p>
-                {userAvatar ? (
-                  <img
-                    src={userAvatar}
-                    alt={userName}
-                    className="header__menu-avatar header__menu-avatar_image"
-                    onClick={(e) => {
-                      handleProfileClick(e);
-                      setIsMobileMenuOpened(false);
-                    }}
-                  />
-                ) : (
-                  <div
-                    className="header__menu-avatar header__menu-avatar_initial"
-                    onClick={(e) => {
-                      handleProfileClick(e);
-                      setIsMobileMenuOpened(false);
-                    }}
-                  >
-                    {getInitial(userName)}
-                  </div>
-                )}
+                <Link to="/profile" onClick={() => setIsMobileMenuOpened(false)}>
+                  {userAvatar ? (
+                    <img
+                      src={userAvatar}
+                      alt={userName}
+                      className="header__menu-avatar header__menu-avatar_image"
+                    />
+                  ) : (
+                    <div className="header__menu-avatar header__menu-avatar_initial">
+                      {getInitial(userName)}
+                    </div>
+                  )}
+                </Link>
               </div>
 
               <button
@@ -134,32 +125,24 @@ const Header = ({ handleAddClick, handleProfileClick, weatherData, currentUser }
           >
             + Add clothes
           </button>
-          <p
-            className="header__username"
-            style={{ cursor: "pointer" }}
-            onClick={() => navigate("/profile")}
-          >
+          <Link to="/profile" className="header__username">
             {userName}
-          </p>
+          </Link>
 
           {/* Avatar - either image or initial */}
-          {userAvatar ? (
-            <img
-              src={userAvatar}
-              alt={userName}
-              className="header__avatar header__avatar_image"
-              style={{ cursor: "pointer" }}
-              onClick={() => navigate("/profile")}
-            />
-          ) : (
-            <div
-              className="header__avatar header__avatar_initial"
-              style={{ cursor: "pointer" }}
-              onClick={() => navigate("/profile")}
-            >
-              {getInitial(userName)}
-            </div>
-          )}
+          <Link to="/profile" className="header__avatar-link">
+            {userAvatar ? (
+              <img
+                src={userAvatar}
+                alt={userName}
+                className="header__avatar header__avatar_image"
+              />
+            ) : (
+              <div className="header__avatar header__avatar_initial">
+                {getInitial(userName)}
+              </div>
+            )}
+          </Link>
         </div>
       </div>
     </header>
