@@ -47,3 +47,6 @@ WTWR is a weather-based clothing recommendation application built with React. Th
 - More detailed weather information (humidity, wind speed)
 - Clothing item categories and filtering
 - User preferences and customization options
+
+## Video Overview
+See the video overview here: https://www.loom.com/share/2e6941924e244aa5a0b4c3c1639a6116
