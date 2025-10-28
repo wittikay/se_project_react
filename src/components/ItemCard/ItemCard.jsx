@@ -1,5 +1,4 @@
 import "./ItemCard.css";
-import { clothingImageMap } from "../../utils/constants";
 
 const ItemCard = ({ item, onCardClick }) => {
   const handleCardClick = () => {
@@ -11,7 +10,7 @@ const ItemCard = ({ item, onCardClick }) => {
       <img
         onClick={handleCardClick}
         className="card__image"
-        src={clothingImageMap[item.imageUrl] || item.imageUrl}
+        src={item.imageUrl}
         alt={item.name}
       />
     </li>

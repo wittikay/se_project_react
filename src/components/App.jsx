@@ -50,11 +50,7 @@ function App({ clothingItems: clothingItemsProp, currentUser: currentUserProp })
     if (!clothingItemsProp || clothingItemsProp.length === 0) {
       getClothingItems()
         .then((items) => {
-          const itemsWithId = items.map(item => ({
-            ...item,
-            _id: item._id || item.id
-          }));
-          setClothingItems(itemsWithId);
+          setClothingItems(items);
         })
         .catch((err) => {
           console.error("Error fetching clothing items:", err);
@@ -86,8 +82,7 @@ function App({ clothingItems: clothingItemsProp, currentUser: currentUserProp })
   const handleAddItem = (item) => {
     addClothingItem(item)
       .then((newItem) => {
-        const itemWithId = { ...newItem, _id: newItem.id || newItem._id };
-        setClothingItems((prev) => [itemWithId, ...prev]);
+        setClothingItems((prev) => [newItem, ...prev]);
         closeActiveModal();
       })
       .catch((err) => {

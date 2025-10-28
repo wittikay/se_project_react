@@ -3,7 +3,6 @@ import mobileOverlayCloseIcon from "../../images/mobileoverlayx.svg";
 import desktopCloseIcon from "../../images/closebtnwhite.svg";
 import ConfirmDeleteModal from "./ConfirmDeleteModal";
 import { deleteClothingItem } from "../../utils/api";
-import { clothingImageMap } from "../../utils/constants";
 
 const ItemModal = ({ activeModal, card, onClose, onDelete }) => {
   const [showConfirm, setShowConfirm] = useState(false);
@@ -35,10 +34,9 @@ const ItemModal = ({ activeModal, card, onClose, onDelete }) => {
   };
 
   const handleConfirmDelete = () => {
-    const itemId = card._id || card.id;
-    deleteClothingItem(itemId)
+    deleteClothingItem(card._id)
       .then(() => {
-        if (onDelete) onDelete(itemId);
+        if (onDelete) onDelete(card._id);
         setShowConfirm(false);
         onClose();
       })
@@ -70,7 +68,7 @@ const ItemModal = ({ activeModal, card, onClose, onDelete }) => {
               />
             </button>
             <img 
-              src={clothingImageMap[card?.imageUrl] || card?.imageUrl} 
+              src={card?.imageUrl} 
               alt={card?.name} 
               className="modal__image" 
             />
