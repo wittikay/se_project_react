@@ -32,6 +32,7 @@ function RootRouter() {
       element: <App clothingItems={clothingItems} setClothingItems={setClothingItems} currentUser={currentUser} setCurrentUser={setCurrentUser} />,
     },
   ], {
+    basename: import.meta.env.MODE === 'production' ? "/se_project_react" : "/",
     future: {
       v7_startTransition: true,
     },
