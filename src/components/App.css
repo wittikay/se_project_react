@@ -1,6 +1,8 @@
 /* Page Layout */
 .page {
-  min-height: 100vh; /* single container controls height */
+  /* single container controls height */
+  min-height: 100vh;
+  min-height: 100dvh; /* mobile safe viewport */
   display: flex;
   flex-direction: column;
   font-family: "Cabinet Grotesk", sans-serif;
@@ -13,7 +15,7 @@
 .page__content {
   display: flex;
   flex-direction: column;
-  flex: 1; /* grow to fill available vertical space, footer stays at bottom */
+  flex: 1 0 auto; /* grow but don't force footer to overlap */
   width: 100%;
 }
 

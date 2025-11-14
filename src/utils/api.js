@@ -27,7 +27,10 @@ function readUserItems() {
 function writeUserItems(items) {
   try {
     localStorage.setItem('userItems', JSON.stringify(items));
-  } catch {}
+  } catch (e) {
+    // Swallow quota/security errors in demo mode; persistence is best-effort only
+    console.warn('Failed to persist userItems to localStorage:', e);
+  }
 }
 
 export async function getClothingItems() {

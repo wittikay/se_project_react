@@ -3,6 +3,7 @@
   max-width: 100vw;
   background-color: #f3f3f3;
   margin-top: auto; /* sticky footer within flex column */
+  flex-shrink: 0; /* never collapse when content grows */
   padding: 16px 0;
 }
 
