@@ -1,6 +1,10 @@
 import "./ItemCard.css";
+import { useState } from "react";
+import fallbackImage from "../../images/T-Shirt.png";
 
 const ItemCard = ({ item, onCardClick }) => {
+  const [src, setSrc] = useState(item.imageUrl || fallbackImage);
+
   const handleCardClick = () => {
     onCardClick && onCardClick(item);
   };
@@ -10,7 +14,9 @@ const ItemCard = ({ item, onCardClick }) => {
       <img
         onClick={handleCardClick}
         className="card__image"
-        src={item.imageUrl}
+        src={src}
+        onError={() => setSrc(fallbackImage)}
+        loading="lazy"
         alt={item.name}
       />
     </li>

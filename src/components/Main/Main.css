@@ -3,6 +3,7 @@
 .main {
   flex: 1;
   background-color: #f5f5f5;
+  padding-bottom: 56px; /* ensure content never collides with footer */
 }
 
 .main__container {
