@@ -1,5 +1,5 @@
 import "./index.css";
-import { createBrowserRouter, RouterProvider } from "react-router-dom";
+import { createHashRouter, RouterProvider } from "react-router-dom";
 import App from "./components/App.jsx";
 import { useState, useEffect } from "react";
 import { getClothingItems } from "./utils/api";
@@ -18,7 +18,7 @@ function RootRouter() {
       .catch(() => setClothingItems([]));
   }, []);
 
-  const router = createBrowserRouter([
+  const router = createHashRouter([
     {
       path: "/",
       element: <App clothingItems={clothingItems} setClothingItems={setClothingItems} currentUser={currentUser} setCurrentUser={setCurrentUser} />,
@@ -32,7 +32,6 @@ function RootRouter() {
       element: <App clothingItems={clothingItems} setClothingItems={setClothingItems} currentUser={currentUser} setCurrentUser={setCurrentUser} />,
     },
   ], {
-    basename: "/se_project_react",
     future: {
       v7_startTransition: true,
     },

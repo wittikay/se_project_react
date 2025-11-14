@@ -6,6 +6,5 @@
    plugins: [react()],
    server: {
      port: 5173,
-     historyApiFallback: true,
    },
  });
