@@ -19,8 +19,9 @@ const AddItemModal = ({ activeModal, onClose, onAddItem }) => {
   const isValidImageUrl = (url) => {
     if (!url) return true;
     try {
-      new URL(url);
-      return /\.(jpg|jpeg|png|gif|bmp|webp|svg)$/i.test(url);
+      const urlObj = new URL(url);
+      // Accept any HTTP/HTTPS URL - let the browser handle image validation
+      return urlObj.protocol === 'http:' || urlObj.protocol === 'https:';
     } catch {
       return false;
     }
@@ -81,7 +82,7 @@ const AddItemModal = ({ activeModal, onClose, onAddItem }) => {
         Image*{" "}
         {errors.imageUrl && (
           <span className="modal__error-text">
-            (This is not a valid image link)
+            (Please enter a valid URL)
           </span>
         )}
       </label>

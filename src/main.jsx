@@ -31,7 +31,11 @@ function RootRouter() {
       path: "*",
       element: <App clothingItems={clothingItems} setClothingItems={setClothingItems} currentUser={currentUser} setCurrentUser={setCurrentUser} />,
     },
-  ]);
+  ], {
+    future: {
+      v7_startTransition: true,
+    },
+  });
 
   return <RouterProvider router={router} />;
 }

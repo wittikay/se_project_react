@@ -45,7 +45,7 @@ const Main = ({ weatherData, clothingItems, onCardClick }) => {
             return (
               <ul className="cards__list">
                 {filtered.map((item) => (
-                  <ItemCard key={item._id} item={item} onCardClick={onCardClick} />
+                  <ItemCard key={item._id || item.id} item={item} onCardClick={onCardClick} />
                 ))}
               </ul>
             );

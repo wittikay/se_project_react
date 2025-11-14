@@ -34,9 +34,10 @@ const ItemModal = ({ activeModal, card, onClose, onDelete }) => {
   };
 
   const handleConfirmDelete = () => {
-    deleteClothingItem(card._id)
+    const itemId = card.id || String(card._id);
+    deleteClothingItem(itemId)
       .then(() => {
-        if (onDelete) onDelete(card._id);
+        if (onDelete) onDelete(card._id || card.id);
         setShowConfirm(false);
         onClose();
       })

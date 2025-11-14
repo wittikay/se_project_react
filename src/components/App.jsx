@@ -96,7 +96,10 @@ function App({ clothingItems: clothingItemsProp, currentUser: currentUserProp })
   };
 
   const handleDeleteItem = (id) => {
-    setClothingItems((prev) => prev.filter((item) => item._id !== id));
+    setClothingItems((prev) => prev.filter((item) => {
+      const itemId = item.id || String(item._id);
+      return itemId !== String(id);
+    }));
   };
 
   return (
