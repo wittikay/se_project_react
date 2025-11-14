@@ -127,8 +127,10 @@ function App({ clothingItems: clothingItemsProp, currentUser: currentUserProp })
               onCardClick={handleCardClick}
             />
           )}
-          <Footer />
         </div>
+
+        {/* Footer sits directly under the flex column parent so it anchors at the bottom */}
+        <Footer />
 
         {/* Modals */}
         <ItemModal
