@@ -1,12 +1,7 @@
 .clothes-section {
-  position: absolute;
-  top: 135px;
-  left: 385px;
-  width: 1015px;
-  max-width: calc(100vw - 425px);
   background: transparent;
-  padding: 0 0 144px 0;
   box-sizing: border-box;
+  width: 100%;
 }
 .clothes-section__header {
   display: flex;
@@ -39,6 +34,18 @@
 
 .clothes-section__list--grid {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  grid-template-columns: repeat(3, minmax(0, 1fr));
   gap: 20px;
+}
+
+@media (max-width: 1024px) {
+  .clothes-section__list--grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 640px) {
+  .clothes-section__list--grid {
+    grid-template-columns: 1fr;
+  }
 }

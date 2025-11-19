@@ -1,6 +1,18 @@
 .profile {
-  position: relative;
-  padding: 32px 0 0 0;
-  margin-bottom: 124px;
-  min-height: 852px;
+  /* Layout: sidebar + content */
+  display: grid;
+  grid-template-columns: 229px 1fr;
+  column-gap: 116px; /* matches previous absolute offset spacing */
+  padding: 119px 40px 124px; /* top aligns sidebar, bottom keeps breathing room */
+  box-sizing: border-box;
+  width: 100%;
+}
+
+@media (max-width: 1024px) {
+  .profile {
+    grid-template-columns: 1fr;
+    column-gap: 0;
+    row-gap: 24px;
+    padding: 88px 16px 96px;
+  }
 }
